@@ -1,0 +1,424 @@
+<UserControl
+    x:Class="DataGridDashboard.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cvt="using:DataGridDashboard.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:icon="using:Material.Icons.Avalonia"
+    xmlns:m="using:DataGridDashboard.Models"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:DataGridDashboard.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1080"
+    x:DataType="vm:MainViewModel"
+    Background="#eff2f7"
+    CornerRadius="30"
+    Foreground="Black"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <cvt:StringToBrushConverter x:Key="StringToBrushConverter" />
+    </UserControl.Resources>
+
+    <Grid ColumnDefinitions="200,*">
+
+        <!--  Left Menu  -->
+        <Grid RowDefinitions="Auto,*">
+
+            <!--  Menu Icon  -->
+            <Button
+                Margin="20,28,0,35"
+                Classes="top">
+                <icon:MaterialIcon
+                    Width="15"
+                    Height="15"
+                    Kind="Menu" />
+            </Button>
+
+            <Border
+                Grid.Row="1"
+                Background="#623ed0"
+                CornerRadius="0 50 0 30">
+                <DockPanel>
+
+                    <!--  Menu Logo  -->
+                    <Border
+                        Width="80"
+                        Height="80"
+                        Margin="20,-30,0,0"
+                        Padding="3"
+                        HorizontalAlignment="Left"
+                        Background="White"
+                        CornerRadius="100"
+                        DockPanel.Dock="Top">
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush Source="/Assets/p1.webp" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Border>
+
+                    <!--  Menu Titles  -->
+                    <TextBlock
+                        Margin="5,25,0,10"
+                        DockPanel.Dock="Top"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Text="Silvers Club"
+                        TextAlignment="Center" />
+                    <TextBlock
+                        Margin="5,25,0,10"
+                        DockPanel.Dock="Top"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Foreground="#d0bfff"
+                        Text="Members, France"
+                        TextAlignment="Center" />
+
+                    <!--  Menu Seprator  -->
+                    <Separator
+                        Height="0.8"
+                        Margin="25"
+                        Background="#7e5fdc"
+                        DockPanel.Dock="Top" />
+
+                    <!--  Menu Buttons  -->
+                    <StackPanel
+                        Classes="menus"
+                        DockPanel.Dock="Top">
+                        <Button>
+                            <StackPanel Orientation="Horizontal">
+                                <icon:MaterialIcon Kind="HomeVariant" />
+                                <TextBlock Text="Dashboard" />
+                            </StackPanel>
+                        </Button>
+                        <Button>
+                            <StackPanel Orientation="Horizontal">
+                                <icon:MaterialIcon Kind="CalendarClock" />
+                                <TextBlock Text="Events" />
+                            </StackPanel>
+                        </Button>
+                        <Button Classes="active">
+                            <StackPanel Orientation="Horizontal">
+                                <icon:MaterialIcon Kind="AccountMultipleOutline" />
+                                <TextBlock Text="Members" />
+                            </StackPanel>
+                        </Button>
+                        <Button>
+                            <StackPanel Orientation="Horizontal">
+                                <icon:MaterialIcon Kind="CashMultiple" />
+                                <TextBlock Text="Wallet" />
+                            </StackPanel>
+                        </Button>
+                        <Button>
+                            <StackPanel Orientation="Horizontal">
+                                <icon:MaterialIcon Kind="Forum" />
+                                <TextBlock Text="Messages" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <Button
+                        Margin="15,0"
+                        VerticalAlignment="Bottom"
+                        Classes="logout"
+                        DockPanel.Dock="Bottom">
+                        <StackPanel Orientation="Horizontal">
+                            <icon:MaterialIcon Kind="Logout" />
+                            <TextBlock Text="Logout" />
+                        </StackPanel>
+                    </Button>
+
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!--  Main Section  -->
+        <Grid
+            Grid.Column="1"
+            Margin="30,20,20,20"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto">
+            <!--  Search Textbox  -->
+            <Panel
+                Width="300"
+                HorizontalAlignment="Left">
+                <TextBlock
+                    Margin="20,0"
+                    VerticalAlignment="Center"
+                    Foreground="#b0b9c6"
+                    IsHitTestVisible="False"
+                    IsVisible="{Binding #search.Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+                    Text="Search Here ..."
+                    ZIndex="1" />
+                <TextBox
+                    x:Name="search"
+                    Classes="search" />
+                <Button
+                    Margin="0,0,15,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    CornerRadius="20">
+                    <icon:MaterialIcon
+                        Width="15"
+                        Height="15"
+                        Foreground="#b0b9c6"
+                        Kind="Magnify" />
+                </Button>
+            </Panel>
+
+            <!--  Top Buttons  -->
+            <StackPanel
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Spacing="5">
+                <Button
+                    Background="#dcdcdc"
+                    Classes="top">
+                    <icon:MaterialIcon Kind="Bell" />
+                </Button>
+                <Button
+                    Background="#dcdcdc"
+                    Classes="top">
+                    <icon:MaterialIcon Kind="Cog" />
+                </Button>
+            </StackPanel>
+
+            <!--  Page Title  -->
+            <TextBlock
+                Grid.Row="1"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Left"
+                FontSize="32"
+                FontWeight="SemiBold"
+                Foreground="#121518"
+                Text="Members" />
+
+            <!--  Add Button  -->
+            <Button
+                Grid.Row="1"
+                Margin="0,20,0,0"
+                Classes="add"
+                FontSize="13">
+                <StackPanel Orientation="Horizontal">
+                    <icon:MaterialIcon
+                        Width="11"
+                        Height="11"
+                        Margin="0,1,8,0"
+                        VerticalAlignment="Center"
+                        Kind="Plus" />
+                    <TextBlock Text="Add New Member" />
+                </StackPanel>
+            </Button>
+
+            <!--  Table Buttons  -->
+            <StackPanel
+                Grid.Row="2"
+                Margin="0,10,0,0"
+                Classes="tabs"
+                Orientation="Horizontal">
+                <Button
+                    Classes="active"
+                    Content="Club Staff" />
+                <Button Content="Players" />
+                <Button Content="Archived" />
+            </StackPanel>
+
+            <!--  Seprator  -->
+            <Separator
+                Grid.Row="3"
+                Height="1"
+                Margin="0,-1,0,10"
+                Background="#dae2ea" />
+
+            <!--  Counter Title  -->
+            <Grid
+                Grid.Row="4"
+                ColumnDefinitions="*,*">
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Foreground="#121518"
+                    Text="68 Club Staff" />
+                <StackPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                        Foreground="#121518"
+                        Text="Filter by" />
+                    <!--  Filter Textbox  -->
+                    <Panel
+                        Grid.Row="4"
+                        Width="300"
+                        HorizontalAlignment="Right">
+                        <TextBlock
+                            Margin="15,0"
+                            VerticalAlignment="Center"
+                            Foreground="#b0b9c6"
+                            IsHitTestVisible="False"
+                            IsVisible="{Binding #filter.Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+                            Text="Search in Members ..."
+                            ZIndex="1" />
+                        <TextBox
+                            x:Name="filter"
+                            Classes="filter" />
+                    </Panel>
+                </StackPanel>
+            </Grid>
+
+            <!--  Member DataGrid  -->
+            <DataGrid
+                Grid.Row="5"
+                Classes="dataGrid"
+                ItemsSource="{Binding Members}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        Binding="{Binding Number}"
+                        CanUserResize="False"
+                        Header="#"
+                        IsReadOnly="True" />
+
+                    <DataGridTemplateColumn
+                        Width="*"
+                        CanUserResize="False"
+                        Header="Member"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border
+                                        Width="25"
+                                        Height="25"
+                                        Margin="0,0,10,0"
+                                        Background="{Binding Color, Converter={StaticResource StringToBrushConverter}}"
+                                        CornerRadius="50">
+                                        <TextBlock
+                                            Margin="0,0,0,1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="White"
+                                            Text="{Binding Character}" />
+                                    </Border>
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Position}"
+                        Header="Position"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Email}"
+                        Header="Email Address"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Phone}"
+                        Header="Phone Number"
+                        IsReadOnly="True" />
+
+                    <DataGridTemplateColumn
+                        Width="Auto"
+                        CanUserResize="False"
+                        Header="Operations"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Classes="edit">
+                                        <icon:MaterialIcon Kind="PencilOutline" />
+                                    </Button>
+                                    <Button
+                                        Margin="5,0,0,0"
+                                        Classes="remove">
+                                        <icon:MaterialIcon Kind="PencilOutline" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--  Paginatin Section  -->
+            <Border
+                Grid.Row="6"
+                Margin="0,10,10,10"
+                Padding="5"
+                HorizontalAlignment="Right"
+                Background="White"
+                BorderBrush="#dee4ec"
+                BorderThickness="1"
+                CornerRadius="5">
+                <StackPanel
+                    Orientation="Horizontal"
+                    Spacing="1">
+                    <Button Classes="paging">
+                        <icon:MaterialIcon Kind="ChevronLeft" />
+                    </Button>
+                    <Rectangle
+                        Width="1"
+                        Margin="2,6"
+                        Fill="#dee4ec" />
+                    <Button
+                        Classes="paging active"
+                        Content="1" />
+                    <Button
+                        Classes="paging"
+                        Content="2" />
+                    <Button
+                        Classes="paging"
+                        Content="3" />
+
+                    <TextBlock
+                        Margin="9,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="#6c7682"
+                        Text="..."
+                        TextAlignment="Center" />
+
+                    <Button
+                        Classes="paging"
+                        Content="7" />
+                    <Button
+                        Classes="paging"
+                        Content="8" />
+                    <Button
+                        Classes="paging"
+                        Content="9" />
+                    <Rectangle
+                        Width="1"
+                        Margin="6,2"
+                        Fill="#dee4ec" />
+                    <Button Classes="paging">
+                        <icon:MaterialIcon Kind="ChevronRight" />
+                    </Button>
+                </StackPanel>
+            </Border>
+
+
+        </Grid>
+
+
+    </Grid>
+</UserControl>
